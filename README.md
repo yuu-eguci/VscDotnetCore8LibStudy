@@ -17,6 +17,8 @@ dotnet new sln
 # 🎉 新しい .NET クラス ライブラリ プロジェクトをソリューションに追加
 dotnet new classlib -o StringLibrary
 
+# 🎉 ライブラリ プロジェクトをソリューションに追加
+dotnet sln add StringLibrary/StringLibrary.csproj
 
 
 # これ↓は VscDotnetCore8Study をコピーしたものだから気にしないで。
