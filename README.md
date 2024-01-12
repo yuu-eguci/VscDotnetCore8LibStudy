@@ -36,6 +36,8 @@ dotnet sln add ShowCase/ShowCase.csproj
 
 # ✨ ShowCase/Program.cs Main を実装
 
+# 🎉 新しいコンソール アプリ プロジェクトにクラス ライブラリへのアクセス権を付与
+dotnet add ShowCase/ShowCase.csproj reference StringLibrary/StringLibrary.csproj
 
 
 # これ↓は VscDotnetCore8Study をコピーしたものだから気にしないで。
