@@ -44,4 +44,7 @@ dotnet run --project ShowCase/ShowCase.csproj
 
 # ✅ 「StringLibraryTest」という名前の単体テスト プロジェクトを作成
 dotnet new mstest -o StringLibraryTest
+
+# 🎉 テスト プロジェクトをソリューションに追加
+dotnet sln add StringLibraryTest/StringLibraryTest.csproj
 ```
