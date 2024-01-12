@@ -31,6 +31,9 @@ dotnet build
 # -o: ディレクトリ名のこと
 dotnet new console -o ShowCase --use-program-main
 
+# 🎉 コンソール アプリ プロジェクトをソリューションに追加
+dotnet sln add ShowCase/ShowCase.csproj
+
 
 # これ↓は VscDotnetCore8Study をコピーしたものだから気にしないで。
 
