@@ -55,4 +55,7 @@ dotnet add StringLibraryTest/StringLibraryTest.csproj reference StringLibrary/St
 
 # ✅ テストを実行
 dotnet test StringLibraryTest/StringLibraryTest.csproj
+
+# ✅ リリースバージョンのテストを実行
+dotnet test StringLibraryTest/StringLibraryTest.csproj --configuration Release
 ```
