@@ -58,4 +58,26 @@ dotnet test StringLibraryTest/StringLibraryTest.csproj
 
 # ✅ リリースバージョンのテストを実行
 dotnet test StringLibraryTest/StringLibraryTest.csproj --configuration Release
+
+# ここからはチュートリアルにないけど、 VscDotnetCore8Study を参考にしてアプリをビルドしてみようぜ。
+
+# 🚀 チュートリアルにないけど VscDotnetCore8Study を参考にアプリを発行する
+# 既定のビルド構成は "デバッグ" であるため、このコマンドでは "リリース" ビルド構成を指定する
+dotnet publish ShowCase --configuration Release
+
+# 📝 アプリを実行する
+# 実行方法は、以下の2通り
+# 1. 実行可能ファイルを使用する、
+(cd ShowCase/bin/Release/net8.0/publish; ./ShowCase)
+# 2. コマンド プロンプトから dotnet ShowCase.dll コマンドを実行
+(cd ShowCase/bin/Release/net8.0/publish; dotnet ShowCase.dll)
+
+# publish フォルダに作られるもののうち……
+# これがないと動かないもの
+# - App 名のファイル: 実行可能ファイルね。
+# - dll ファイル: これはアセンブリだ。
+# - runtimeconfig.json ファイル: 使用する .NET Core ランタイムのバージョンとか。
+# これがなくても動くもの
+# - deps.json ファイル: アプリケーションの依存関係の詳細。
+# - pdb ファイル: デバッグ時に役立つが、アプリケーションの実行には不要。
 ```
