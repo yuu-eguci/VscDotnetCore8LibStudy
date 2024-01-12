@@ -14,6 +14,8 @@ dotnet new gitignore
 # 🎉 new sln でソリューションファイル作成
 dotnet new sln
 
+# 🎉 新しい .NET クラス ライブラリ プロジェクトをソリューションに追加
+dotnet new classlib -o StringLibrary
 
 
 
