@@ -50,4 +50,7 @@ dotnet sln add StringLibraryTest/StringLibraryTest.csproj
 
 # 🎉 StringLibraryTest プロジェクトに StringLibrary プロジェクトへの参照 (アクセス権) を追加
 dotnet add StringLibraryTest/StringLibraryTest.csproj reference StringLibrary/StringLibrary.csproj
+
+# ✅ StringLibraryTest/UnitTest1.cs を実装
+
 ```
