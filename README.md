@@ -3,6 +3,18 @@ VSCode Dotnet Core 8 Library Study!
 
 VscDotnetCore8Study の続きで、 .NET クラス ライブラリを作成するチュートリアルを見つけたのでやってみようぜ。
 
+https://learn.microsoft.com/ja-jp/dotnet/core/tutorials/library-with-visual-studio-code?pivots=dotnet-8-0
+
+## Summary
+
+VscDotnetCore8Study では単体のプロジェクトだったけど、こっちでは別の Util 的なプロジェクトも作る。
+
+- 複数のプロジェクトがあるから、ソリューションファイルが必要ってこと
+- プロジェクト単位で単体テストを作ることも含む
+- で、その Util 的なプロジェクトを、コンソールアプリから読み込むところも含む
+
+## Notes in Progress
+
 ```bash
 # バージョン
 dotnet --version
