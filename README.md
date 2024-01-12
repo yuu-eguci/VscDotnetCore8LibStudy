@@ -53,4 +53,6 @@ dotnet add StringLibraryTest/StringLibraryTest.csproj reference StringLibrary/St
 
 # ✅ StringLibraryTest/UnitTest1.cs を実装
 
+# ✅ テストを実行
+dotnet test StringLibraryTest/StringLibraryTest.csproj
 ```
