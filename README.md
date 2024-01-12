@@ -11,6 +11,8 @@ dotnet --version
 # 🙈 .gitignore 作ってくれるの嬉しすぎ
 dotnet new gitignore
 
+# 🎉 new sln でソリューションファイル作成
+dotnet new sln
 
 
 
