@@ -13,6 +13,10 @@ VscDotnetCore8Study では単体のプロジェクトだったけど、こっち
 - プロジェクト単位で単体テストを作ることも含む
 - で、その Util 的なプロジェクトを、コンソールアプリから読み込むところも含む
 
+Exe を Windows で動かすためにはこれ↓が必要。
+
+https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-8.0.1-windows-x64-installer
+
 ## Notes in Progress
 
 ```bash
