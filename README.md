@@ -34,6 +34,9 @@ dotnet new console -o ShowCase --use-program-main
 # 🎉 コンソール アプリ プロジェクトをソリューションに追加
 dotnet sln add ShowCase/ShowCase.csproj
 
+# ✨ ShowCase/Program.cs Main を実装
+
+
 
 # これ↓は VscDotnetCore8Study をコピーしたものだから気にしないで。
 
