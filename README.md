@@ -20,6 +20,11 @@ dotnet new classlib -o StringLibrary
 # 🎉 ライブラリ プロジェクトをソリューションに追加
 dotnet sln add StringLibrary/StringLibrary.csproj
 
+# ✨ Class1.cs に クラス ライブラリ UtilityLibraries.StringLibrary を実装
+
+# 🚀 ソリューションをビルドし、エラーなしでプロジェクトがコンパイルされることを確認
+dotnet build
+
 
 # これ↓は VscDotnetCore8Study をコピーしたものだから気にしないで。
 
