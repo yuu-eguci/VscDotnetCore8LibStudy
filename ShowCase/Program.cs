@@ -35,7 +35,9 @@ static class Program
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
-            Console.Clear();
+            // Windows だと stdout がリダイレクトされてると Clear が例外を投げるので、そのときはクリアしない。
+            if (!Console.IsOutputRedirected)
+                Console.Clear();
             Console.WriteLine($"{Environment.NewLine}Press <Enter> only to exit; otherwise, enter a string and press <Enter>:{Environment.NewLine}");
             row = 3;
         }
