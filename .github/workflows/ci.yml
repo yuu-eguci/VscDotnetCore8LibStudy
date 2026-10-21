@@ -35,3 +35,24 @@ jobs:
       - run: docker build -t vsc-lib-study .
       - name: smoke (pipe 8 lines into ShowCase)
         run: printf 'a\nB\nc\nD\ne\nF\ng\nH\n\n' | docker run --rm -i --init vsc-lib-study | grep -c 'Begins with uppercase?' | grep -qx 8
+
+  windows-smoke:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      - run: dotnet publish ShowCase --configuration Release --output publish
+      - name: smoke (real exe, stdin and stdout redirected to files)
+        shell: cmd
+        run: |
+          (echo a& echo B& echo c& echo D& echo e& echo F& echo g& echo H& echo.) > in.txt
+          publish\ShowCase.exe < in.txt > out.txt
+          if errorlevel 1 exit /b 1
+          type out.txt
+          for /f %%c in ('findstr /c:"Begins with uppercase?" out.txt ^| find /c /v ""') do set N=%%c
+          if not "%N%"=="8" exit /b 1
