@@ -9,7 +9,7 @@ public static class StringLibrary
         if (string.IsNullOrWhiteSpace(str))
             return false;
 
-        char ch = str[0];
-        return char.IsUpper(ch);
+        // char.IsUpper(string, int) はサロゲートペアも 1 文字として判定する。
+        return char.IsUpper(str, 0);
     }
 }

@@ -29,7 +29,8 @@ static class Program
         // Declare a ResetConsole local method
         void ResetConsole()
         {
-            if (row > 0)
+            // 標準入力がパイプとかでリダイレクトされてると ReadKey できないので、一時停止はしない。
+            if (row > 0 && !Console.IsInputRedirected)
             {
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();

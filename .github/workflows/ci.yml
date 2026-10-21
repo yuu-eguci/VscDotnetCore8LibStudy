@@ -11,6 +11,7 @@ permissions:
 jobs:
   dotnet:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
@@ -25,9 +26,12 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - run: docker build --target test .
       - run: docker build -t vsc-lib-study .
+      - name: smoke (pipe 8 lines into ShowCase)
+        run: printf 'a\nB\nc\nD\ne\nF\ng\nH\n\n' | docker run --rm -i --init vsc-lib-study | grep -c 'Begins with uppercase?' | grep -qx 8

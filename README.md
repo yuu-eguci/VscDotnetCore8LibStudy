@@ -37,6 +37,11 @@ VscDotnetCore8Study では単体のプロジェクトだったけど、こっち
 - プロジェクト単位で単体テストを作ることも含む
 - で、その Util 的なプロジェクトを、コンソールアプリから読み込むところも含む
 
+チュートリアルからちょっと変えたところ。
+
+- `StartsWithUpper` はサロゲートペアの大文字 (`𝐀` とか) もちゃんと大文字扱いする。titlecase (`ǅ`) は大文字扱いしない
+- ShowCase は標準入力をパイプで流しても落ちない (`printf 'Abc\n\n' | docker run --rm -i vsc-lib-study`)。そのときは "Press any key" の一時停止はしない
+
 Exe を Windows で動かすためには .NET 10 Runtime が必要。ここ↓から入れられる。
 
 https://dotnet.microsoft.com/en-us/download/dotnet/10.0
@@ -44,6 +49,7 @@ https://dotnet.microsoft.com/en-us/download/dotnet/10.0
 ## Notes in Progress
 
 作成・実行・テストのメモ。
+現在のファイル名は StringLibrary.cs と StringLibraryTests.cs。
 
 ```bash
 # バージョン
@@ -62,7 +68,7 @@ dotnet new classlib -o StringLibrary
 # ライブラリ プロジェクトをソリューションに追加
 dotnet sln add StringLibrary/StringLibrary.csproj
 
-# Class1.cs に クラス ライブラリ UtilityLibraries.StringLibrary を実装
+# StringLibrary.cs に クラス ライブラリ UtilityLibraries.StringLibrary を実装
 
 # ソリューションをビルドし、エラーなしでプロジェクトがコンパイルされることを確認
 dotnet build
@@ -93,7 +99,7 @@ dotnet sln add StringLibraryTest/StringLibraryTest.csproj
 # StringLibraryTest プロジェクトに StringLibrary プロジェクトへの参照 (アクセス権) を追加
 dotnet add StringLibraryTest/StringLibraryTest.csproj reference StringLibrary/StringLibrary.csproj
 
-# StringLibraryTest/UnitTest1.cs を実装
+# StringLibraryTest/StringLibraryTests.cs を実装
 
 # テストを実行
 dotnet test StringLibraryTest/StringLibraryTest.csproj
