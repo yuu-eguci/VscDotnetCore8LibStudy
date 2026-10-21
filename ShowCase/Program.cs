@@ -1,8 +1,8 @@
 ﻿using UtilityLibraries;
 
-class Program
+static class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // row 変数を使って、コンソール ウィンドウに書き込まれるデータの行数のカウントを維持します。
         // これが 25 以上になると、コードによってコンソール ウィンドウがクリアされ、

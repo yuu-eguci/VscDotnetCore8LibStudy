@@ -5,6 +5,30 @@ VscDotnetCore8Study の続きで、 .NET クラス ライブラリを作成す�
 
 https://learn.microsoft.com/ja-jp/dotnet/core/tutorials/library-with-visual-studio-code?pivots=dotnet-8-0
 
+- Docker: 対応!
+- .NET: 10 (LTS)!
+- Linter: .NET アナライザー (AnalysisLevel latest-recommended) + dotnet format!
+- Test: MSTest 4!
+
+## パッと実行してみたい
+
+```bash
+# テストと format チェックを実行します。
+docker build --target test .
+
+# ShowCase を起動します。文字列を入力し、空の Enter で終了します。
+docker build -t vsc-lib-study .
+docker run --rm -it vsc-lib-study
+```
+
+ローカルに .NET 10 SDK があるならこっちでも OK。
+
+```bash
+dotnet test
+dotnet format --verify-no-changes
+dotnet run --project ShowCase
+```
+
 ## Summary
 
 VscDotnetCore8Study では単体のプロジェクトだったけど、こっちでは別の Util 的なプロジェクトも作る。
@@ -13,80 +37,82 @@ VscDotnetCore8Study では単体のプロジェクトだったけど、こっち
 - プロジェクト単位で単体テストを作ることも含む
 - で、その Util 的なプロジェクトを、コンソールアプリから読み込むところも含む
 
-Exe を Windows で動かすためにはこれ↓が必要。
+Exe を Windows で動かすためには .NET 10 Runtime が必要。ここ↓から入れられる。
 
-https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-8.0.1-windows-x64-installer
+https://dotnet.microsoft.com/en-us/download/dotnet/10.0
 
 ## Notes in Progress
+
+作成・実行・テストのメモ。
 
 ```bash
 # バージョン
 dotnet --version
-# --> 8.0.101
+# --> 10.0.x
 
-# 🙈 .gitignore 作ってくれるの嬉しすぎ
+# .gitignore 作ってくれるの嬉しすぎ
 dotnet new gitignore
 
-# 🎉 new sln でソリューションファイル作成
+# new sln でソリューションファイル作成
 dotnet new sln
 
-# 🎉 新しい .NET クラス ライブラリ プロジェクトをソリューションに追加
+# 新しい .NET クラス ライブラリ プロジェクトをソリューションに追加
 dotnet new classlib -o StringLibrary
 
-# 🎉 ライブラリ プロジェクトをソリューションに追加
+# ライブラリ プロジェクトをソリューションに追加
 dotnet sln add StringLibrary/StringLibrary.csproj
 
-# ✨ Class1.cs に クラス ライブラリ UtilityLibraries.StringLibrary を実装
+# Class1.cs に クラス ライブラリ UtilityLibraries.StringLibrary を実装
 
-# 🚀 ソリューションをビルドし、エラーなしでプロジェクトがコンパイルされることを確認
+# ソリューションをビルドし、エラーなしでプロジェクトがコンパイルされることを確認
 dotnet build
 
-# 🎉 new console でクラスライブラリを利用するプロジェクト作成
+# new console でクラスライブラリを利用するプロジェクト作成
 # チュートリアルには --use-program-main がないけど、追加している。
 # だって、このあとのステップで、どうせクラスベースに変更してるんだもん。
 # -o: ディレクトリ名のこと
 dotnet new console -o ShowCase --use-program-main
 
-# 🎉 コンソール アプリ プロジェクトをソリューションに追加
+# コンソール アプリ プロジェクトをソリューションに追加
 dotnet sln add ShowCase/ShowCase.csproj
 
-# ✨ ShowCase/Program.cs Main を実装
+# ShowCase/Program.cs Main を実装
 
-# 🎉 新しいコンソール アプリ プロジェクトにクラス ライブラリへのアクセス権を付与
+# 新しいコンソール アプリ プロジェクトにクラス ライブラリへのアクセス権を付与
 dotnet add ShowCase/ShowCase.csproj reference StringLibrary/StringLibrary.csproj
 
-# ✨ アプリを実行する
+# アプリを実行する
 dotnet run --project ShowCase/ShowCase.csproj
 
-# ✅ 「StringLibraryTest」という名前の単体テスト プロジェクトを作成
+# 「StringLibraryTest」という名前の単体テスト プロジェクトを作成
 dotnet new mstest -o StringLibraryTest
 
-# 🎉 テスト プロジェクトをソリューションに追加
+# テスト プロジェクトをソリューションに追加
 dotnet sln add StringLibraryTest/StringLibraryTest.csproj
 
-# 🎉 StringLibraryTest プロジェクトに StringLibrary プロジェクトへの参照 (アクセス権) を追加
+# StringLibraryTest プロジェクトに StringLibrary プロジェクトへの参照 (アクセス権) を追加
 dotnet add StringLibraryTest/StringLibraryTest.csproj reference StringLibrary/StringLibrary.csproj
 
-# ✅ StringLibraryTest/UnitTest1.cs を実装
+# StringLibraryTest/UnitTest1.cs を実装
 
-# ✅ テストを実行
+# テストを実行
 dotnet test StringLibraryTest/StringLibraryTest.csproj
 
-# ✅ リリースバージョンのテストを実行
+# リリースバージョンのテストを実行
 dotnet test StringLibraryTest/StringLibraryTest.csproj --configuration Release
 
 # ここからはチュートリアルにないけど、 VscDotnetCore8Study を参考にしてアプリをビルドしてみようぜ。
 
-# 🚀 チュートリアルにないけど VscDotnetCore8Study を参考にアプリを発行する
+# チュートリアルにないけど VscDotnetCore8Study を参考にアプリを発行する
 # 既定のビルド構成は "デバッグ" であるため、このコマンドでは "リリース" ビルド構成を指定する
 dotnet publish ShowCase --configuration Release
 
-# 📝 アプリを実行する
+# アプリを実行する
 # 実行方法は、以下の2通り
 # 1. 実行可能ファイルを使用する、
-(cd ShowCase/bin/Release/net8.0/publish; ./ShowCase)
+(cd ShowCase/bin/Release/net10.0/publish; ./ShowCase)
 # 2. コマンド プロンプトから dotnet ShowCase.dll コマンドを実行
-(cd ShowCase/bin/Release/net8.0/publish; dotnet ShowCase.dll)
+(cd ShowCase/bin/Release/net10.0/publish; dotnet ShowCase.dll)
 
 # publish フォルダに作られるもののうち……
 # これがないと動かないもの
